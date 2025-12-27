@@ -7,8 +7,8 @@ import { setRefreshTokenCookie } from "../configs/cookie";
 export const register = asyncHandler(async (req: Request, res: Response) => {
   const { email, password, role } = req.body;
   const {user, token} = await service.createUser({ email, password, role });
-  const cookie = setRefreshTokenCookie(token.refresh_token, res)
+  const cookie = setRefreshTokenCookie(token.refreshToken, res)
   res.status(201).json(
-    new ApiResponce(true, "User registered successfully", {user, token, cookie})
+    new ApiResponce(true, "User registered successfully", {user, AccessToken: token.accessToken, cookie})
   );
 });
